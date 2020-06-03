@@ -1,9 +1,11 @@
 resolver: lts-14.27
 packages:
 - ../ghc-tcplugins-extra
+- ../thoralf
 - ../uom-plugin
 - ../uom-plugin-defs
 - ../uom-plugin-tutorial
 - ../uom-plugin-examples
 extra-deps:
 - units-parser-0.1.0.0
+- simple-smt-0.9.4@sha256:93746e0c4bade39c9848549103de5b65b169f1faa5b76c7b9bcde2031f31c58f,775
