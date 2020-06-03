@@ -3,6 +3,7 @@ packages:
 - ../build
 - ../ghc-tcplugins-extra
 - ../uom-plugin
+- ../uom-plugin-defs
 - ../uom-plugin-tutorial
 - ../uom-plugin-examples
 extra-deps:

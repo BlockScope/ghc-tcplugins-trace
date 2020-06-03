@@ -2,6 +2,7 @@ resolver: lts-9.21
 packages:
 - ../ghc-tcplugins-extra
 - ../uom-plugin
+- ../uom-plugin-defs
 - ../uom-plugin-examples
 extra-deps:
 - units-parser-0.1.0.0

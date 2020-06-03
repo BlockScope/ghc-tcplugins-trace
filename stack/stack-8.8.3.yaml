@@ -2,6 +2,7 @@ resolver: lts-15.5
 packages:
 - ../ghc-tcplugins-extra
 - ../uom-plugin
+- ../uom-plugin-defs
 - ../uom-plugin-tutorial
 - ../uom-plugin-examples
 extra-deps:
