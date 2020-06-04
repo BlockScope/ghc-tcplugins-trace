@@ -1,6 +1,7 @@
 resolver: lts-9.21
 packages:
 - ../ghc-tcplugins-extra
+- ../ghc-tcplugins-api
 - ../thoralf
 - ../uom-plugin
 - ../uom-plugin-defs
