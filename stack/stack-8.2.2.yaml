@@ -2,7 +2,7 @@ resolver: lts-11.22
 packages:
 - ../build
 - ../ghc-tcplugins-extra
-- ../ghc-tcplugins-api
+- ../ghc-corroborate
 - ../thoralf
 - ../uom-plugin
 - ../uom-plugin-defs
