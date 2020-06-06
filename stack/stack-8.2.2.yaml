@@ -4,7 +4,7 @@ packages:
 - ../ghc-tcplugins-extra
 - ../ghc-corroborate
 - ../thoralf
-- ../units-quantity
+- ../uom-quantity
 - ../uom-plugin
 - ../uom-plugin-defs
 - ../uom-plugin-tutorial
