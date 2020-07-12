@@ -1,0 +1,80 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.dhall by hpack version 0.31.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: ba51522b2ae05db97c88f1909b2386c6ef659fe0e9eb065e9e4bcf2f8b4c8b84
+
+name:           ghc-tcplugins-trace
+version:        0.1.0.0
+synopsis:       Tracing of typechecking constraints
+description:    Tracing pretty printed constraints encountered when typechecking.
+category:       Development
+homepage:       https://github.com/blockscope/ghc-tcplugins-trace#readme
+bug-reports:    https://github.com/blockscope/ghc-tcplugins-trace/issues
+author:         Divesh Otwani
+maintainer:     Ben Gamari
+license:        MIT
+license-file:   LICENSE
+tested-with:    GHC == 8.4.4
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/blockscope/ghc-tcplugins-trace
+
+flag suppress-failing-tests
+  manual: False
+  default: True
+
+library
+  exposed-modules:
+      Plugins.Print.Constraints
+      Plugins.Print
+  hs-source-dirs:
+      src
+  other-extensions: TypeFamilies TypeInType GADTs RecordWildCards
+  ghc-options: -Wall -fno-warn-partial-type-signatures
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra >=0.5
+    , hashable
+    , mtl
+    , simple-smt
+    , template-haskell >=2.9
+    , th-printf
+    , units-parser >=0.1
+    , uom-quantity
+    , uom-th
+  default-language: Haskell2010
+
+test-suite hlint
+  type: exitcode-stdio-1.0
+  main-is: HLint.hs
+  other-modules:
+      Paths_ghc_tcplugins_trace
+  hs-source-dirs:
+      test-suite-hlint
+  ghc-options: -Wall -fno-warn-partial-type-signatures -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , containers
+    , ghc-corroborate
+    , ghc-prim
+    , ghc-tcplugins-extra >=0.5
+    , hashable
+    , hlint
+    , mtl
+    , simple-smt
+    , template-haskell >=2.9
+    , th-printf
+    , units-parser >=0.1
+    , uom-quantity
+    , uom-th
+  if flag(suppress-failing-tests)
+    buildable: False
+  default-language: Haskell2010
