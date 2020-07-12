@@ -42,6 +42,6 @@ pprCtsStep DebugPlugin{..} gCts dCts wCts =
 tracePlugin :: DebugPlugin -> String -> TcPluginM ()
 tracePlugin DebugPlugin{..} s'
     | coerce traceCallCount || coerce traceCts || coerce traceCarry =
-            tcPluginIO $ putStrLn s'
+        if null s' then return () else tcPluginIO $ putStrLn s'
 
     | otherwise = return ()
