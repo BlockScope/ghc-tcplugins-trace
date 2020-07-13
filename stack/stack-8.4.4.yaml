@@ -1,8 +1,10 @@
 resolver: lts-12.16
 packages:
 - ../ghc-tcplugins-extra
+- ../ghc-tcplugins-trace
 - ../ghc-corroborate
 - ../thoralf
+- ../uom-th
 - ../uom-quantity
 - ../uom-plugin
 - ../uom-plugin-defs
