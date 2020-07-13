@@ -30,8 +30,8 @@ printCts
 printCts (TraceCts ctsGHC) parseFailed gs ds ws
     | ctsGHC = do
         tcPluginIO $ do
-            let p = [s|>>> GHC-TcPlugin-Called (%s)|] $
-                    if parseFailed then "Parse Failed" else "Solving"
+            let p = [s|>>> GHC-TcPlugin-%s|] $
+                    if parseFailed then "Parse-Failed" else "Solving"
             traverse_ putStrLn $ p : pprCts gs ds ws
 
         return $ TcPluginOk [] []
