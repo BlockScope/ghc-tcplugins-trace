@@ -28,11 +28,12 @@ data DebugPlugin =
 
 pprCtsStep
     :: DebugPlugin
+    -> Maybe String
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
-pprCtsStep DebugPlugin{..} gCts dCts wCts =
+pprCtsStep DebugPlugin{..} intro gCts dCts wCts = maybe [] return intro ++
     if not (coerce traceCts) then [] else
     [ [s|+++ GHC-Decs-Given = %s|] $ showList gCts
     , [s|+++ GHC-Decs-Derived = %s|] $ showList dCts

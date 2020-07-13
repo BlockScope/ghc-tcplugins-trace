@@ -3,12 +3,11 @@
 
 module Plugins.Print.Constraints
     ( TraceCallCount(..), TraceCts(..)
-    , printCts, showList, pprSolverCallCount
+    , showList, pprSolverCallCount, pprCts
     ) where
 
 import Prelude hiding (showList)
 import Language.Haskell.Printf (s)
-import Data.Foldable (traverse_)
 import Data.List (intercalate)
 import GHC.Corroborate
 
@@ -19,23 +18,6 @@ pprSolverCallCount :: TraceCallCount -> Int -> String
 pprSolverCallCount (TraceCallCount callCount) n
     | callCount = [s|>>> GHC-TcPlugin #%d|] n
     | otherwise = ""
-
-printCts
-    :: TraceCts
-    -> Bool
-    -> [Ct] -- ^ Given constraints
-    -> [Ct] -- ^ Derived constraints
-    -> [Ct] -- ^ Wanted constraints
-    -> TcPluginM TcPluginResult
-printCts (TraceCts ctsGHC) parseFailed gs ds ws
-    | ctsGHC = do
-        tcPluginIO $ do
-            let p = [s|>>> GHC-TcPlugin-%s|] $
-                    if parseFailed then "Parse-Failed" else "Solving"
-            traverse_ putStrLn $ p : pprCts gs ds ws
-
-        return $ TcPluginOk [] []
-    | otherwise = return $ TcPluginOk [] []
 
 pprCts
     :: [Ct] -- ^ Given constraints
