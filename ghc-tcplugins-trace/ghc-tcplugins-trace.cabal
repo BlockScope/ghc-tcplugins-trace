@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.31.0.
+-- This file has been generated from package.dhall by hpack version 0.34.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ba51522b2ae05db97c88f1909b2386c6ef659fe0e9eb065e9e4bcf2f8b4c8b84
+-- hash: 1a4745b029e04351e06763d797afe71d2bf59ef68a3d25f89476f3008ee72d54
 
 name:           ghc-tcplugins-trace
 version:        0.1.0.0
@@ -75,6 +75,4 @@ test-suite hlint
     , units-parser >=0.1
     , uom-quantity
     , uom-th
-  if flag(suppress-failing-tests)
-    buildable: False
   default-language: Haskell2010

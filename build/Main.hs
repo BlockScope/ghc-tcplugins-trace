@@ -27,10 +27,17 @@ dhallPkgs = fst <$> dhallCabal
 -- name.
 dhallCabal :: [(Folder, Pkg)]
 dhallCabal =
-    [ ("uom-plugin", "uom-plugin")
+    [ ("build", "build-uom-plugin")
+    , ("ghc-corroborate", "ghc-corroborate")
+    , ("ghc-tcplugins-extra", "ghc-tcplugins-extra")
+    , ("ghc-tcplugins-trace", "ghc-tcplugins-trace")
+    , ("thoralf", "thoralf-plugin")
+    , ("uom-plugin", "uom-plugin")
+    , ("uom-plugin-defs", "uom-plugin-defs")
     , ("uom-plugin-examples", "uom-plugin-examples")
     , ("uom-plugin-tutorial", "uom-plugin-tutorial")
-    , ("build", "build-uom-plugin")
+    , ("uom-quantity", "uom-quantity")
+    , ("uom-th", "uom-th")
     ]
 
 dhallRootImports :: [String]
