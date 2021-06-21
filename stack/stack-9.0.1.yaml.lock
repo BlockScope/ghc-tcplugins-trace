@@ -18,16 +18,9 @@ packages:
       sha256: f03c5f3b6601b8d9939f1f1bc6e593117f0633da1689a7ff13f7201b42394e38
   original:
     hackage: simple-smt-0.9.4@sha256:93746e0c4bade39c9848549103de5b65b169f1faa5b76c7b9bcde2031f31c58f,775
-- completed:
-    hackage: th-printf-0.7@sha256:c6b2c08e62a32a327b29b1a3739939f0c85b4079ff2ae6d79fac639f25ee48b1,2297
-    pantry-tree:
-      size: 1067
-      sha256: ba9a8e2afaf6a16b65c7339fad5fbf49715a6613f5542d6adc42e90eca67b503
-  original:
-    hackage: th-printf-0.7@sha256:c6b2c08e62a32a327b29b1a3739939f0c85b4079ff2ae6d79fac639f25ee48b1,2297
 snapshots:
 - completed:
-    size: 527836
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/11/22.yaml
-    sha256: 341870ac98d8a9f8f77c4adf2e9e0b22063e264a7fbeb4c85b7af5f380dac60e
-  original: lts-11.22
+    size: 468990
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2021/6/20.yaml
+    sha256: 103b65064332ba9a92c52101ce6b46c577ef4f8c0eed92fb7c52847719965b81
+  original: nightly-2021-06-20

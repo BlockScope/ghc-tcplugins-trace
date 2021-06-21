@@ -11,6 +11,6 @@ packages:
 - ../uom-plugin-tutorial
 - ../uom-plugin-examples
 extra-deps:
-- units-parser-0.1.0.0
+- units-parser-0.1.1.4
 - simple-smt-0.9.4@sha256:93746e0c4bade39c9848549103de5b65b169f1faa5b76c7b9bcde2031f31c58f,775
 - th-printf-0.7@sha256:c6b2c08e62a32a327b29b1a3739939f0c85b4079ff2ae6d79fac639f25ee48b1,2297
