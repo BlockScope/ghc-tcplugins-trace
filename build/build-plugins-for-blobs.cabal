@@ -24,7 +24,7 @@ executable build-uom-plugin
       Paths_build_plugins_for_blobs
   hs-source-dirs:
       ./
-  ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       ansi-terminal
     , base
@@ -33,4 +33,8 @@ executable build-uom-plugin
     , shake
     , text
     , time
+  if impl(ghc >= 8.8.0)
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
+  else
+    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010
