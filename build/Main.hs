@@ -27,7 +27,7 @@ dhallPkgs = fst <$> dhallCabal
 -- name.
 dhallCabal :: [(Folder, Pkg)]
 dhallCabal =
-    [ ("build", "build-uom-plugin")
+    [ ("build", "build-plugins-for-blobs")
     , ("ghc-corroborate", "ghc-corroborate")
     , ("ghc-tcplugins-extra", "ghc-tcplugins-extra")
     , ("ghc-tcplugins-trace", "ghc-tcplugins-trace")
@@ -46,12 +46,12 @@ dhallRootImports = ["defaults"]
 formatPkg :: Folder -> Rules ()
 formatPkg folder =
     phony ("dhall-format-" ++ folder)
-    $ cmd Shell ("dhall format --inplace " ++ (folder </> "package.dhall"))
+    $ cmd Shell ("dhall format " ++ (folder </> "package.dhall"))
 
 formatRoot :: String -> Rules ()
 formatRoot x =
     phony ("dhall-format-" ++ x)
-    $ cmd Shell ("dhall format --inplace " ++ (x <.> ".dhall"))
+    $ cmd Shell ("dhall format " ++ (x <.> ".dhall"))
 
 hpack :: Folder -> Rules ()
 hpack folder =

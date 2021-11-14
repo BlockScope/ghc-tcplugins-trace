@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.2.
+-- This file has been generated from package.dhall by hpack version 0.34.5.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1a4745b029e04351e06763d797afe71d2bf59ef68a3d25f89476f3008ee72d54
+-- hash: 43d61b037caa8eb2cab3412d77d07eec1b89723b1f7a93425527ceb998d74770
 
 name:           ghc-tcplugins-trace
 version:        0.1.0.0
@@ -17,7 +17,8 @@ author:         Divesh Otwani
 maintainer:     Ben Gamari
 license:        MIT
 license-file:   LICENSE
-tested-with:    GHC == 8.4.4
+tested-with:
+    GHC == 8.4.4
 build-type:     Simple
 
 source-repository head
@@ -34,7 +35,11 @@ library
       Plugins.Print
   hs-source-dirs:
       src
-  other-extensions: TypeFamilies TypeInType GADTs RecordWildCards
+  other-extensions:
+      TypeFamilies
+      TypeInType
+      GADTs
+      RecordWildCards
   ghc-options: -Wall -fno-warn-partial-type-signatures
   build-depends:
       base

@@ -1,21 +1,15 @@
 let defs = ./defaults.dhall
 
-in  let testopts =
-          [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
-    
+in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
+
     in    defs
-        ⫽ { name =
-              "ghc-tcplugins-trace"
-          , synopsis =
-              "Tracing of typechecking constraints"
+        ⫽ { name = "ghc-tcplugins-trace"
+          , synopsis = "Tracing of typechecking constraints"
           , description =
               "Tracing pretty printed constraints encountered when typechecking."
-          , category =
-              "Development"
-          , github =
-              "blockscope/ghc-tcplugins-trace"
-          , ghc-options =
-              [ "-Wall", "-fno-warn-partial-type-signatures" ]
+          , category = "Development"
+          , github = "blockscope/ghc-tcplugins-trace"
+          , ghc-options = [ "-Wall", "-fno-warn-partial-type-signatures" ]
           , dependencies =
                 defs.dependencies
               # [ "containers"
@@ -32,25 +26,17 @@ in  let testopts =
                 , "units-parser >=0.1"
                 ]
           , library =
-              { source-dirs =
-                  "src"
-              , exposed-modules =
-                  [ "Plugins.Print.Constraints", "Plugins.Print" ]
-              , other-modules =
-                  [] : List Text
-              , other-extensions =
-                  [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]
-              }
-          , tests =
-              { hlint =
-                  { dependencies =
-                      [ "base", "hlint" ]
-                  , ghc-options =
-                      [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
-                  , main =
-                      "HLint.hs"
-                  , source-dirs =
-                      "test-suite-hlint"
-                  }
-              }
+            { source-dirs = "src"
+            , exposed-modules = [ "Plugins.Print.Constraints", "Plugins.Print" ]
+            , other-modules = [] : List Text
+            , other-extensions =
+              [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]
+            }
+          , tests.hlint
+            =
+            { dependencies = [ "base", "hlint" ]
+            , ghc-options = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
+            , main = "HLint.hs"
+            , source-dirs = "test-suite-hlint"
+            }
           }
