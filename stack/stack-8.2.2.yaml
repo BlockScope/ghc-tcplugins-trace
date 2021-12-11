@@ -3,7 +3,7 @@ packages:
 - ../build
 - ../ghc-tcplugins-extra
 - ../ghc-tcplugins-trace
-- ../ghc-corroborate
+- ../ghc-corroborate/ghc-corroborate
 - ../thoralf
 - ../uom-th
 - ../uom-quantity

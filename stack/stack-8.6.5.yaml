@@ -2,7 +2,7 @@ resolver: lts-14.27
 packages:
 - ../ghc-tcplugins-extra
 - ../ghc-tcplugins-trace
-- ../ghc-corroborate
+- ../ghc-corroborate/ghc-corroborate
 - ../thoralf
 - ../uom-th
 - ../uom-quantity
