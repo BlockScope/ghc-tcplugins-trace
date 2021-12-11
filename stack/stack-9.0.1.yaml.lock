@@ -20,7 +20,7 @@ packages:
     hackage: simple-smt-0.9.4@sha256:93746e0c4bade39c9848549103de5b65b169f1faa5b76c7b9bcde2031f31c58f,775
 snapshots:
 - completed:
-    size: 596355
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2021/11/14.yaml
-    sha256: 64de3cf06afed251a84103755277675580dc1bdceeb2533f7cd576072407527a
-  original: nightly-2021-11-14
+    size: 609544
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2021/12/11.yaml
+    sha256: d7cff420864932928372a9a7f1c61d32002bfe490e569ba6eaf15bfd0a62f3e7
+  original: nightly-2021-12-11
