@@ -18,16 +18,9 @@ packages:
       sha256: f03c5f3b6601b8d9939f1f1bc6e593117f0633da1689a7ff13f7201b42394e38
   original:
     hackage: simple-smt-0.9.4@sha256:93746e0c4bade39c9848549103de5b65b169f1faa5b76c7b9bcde2031f31c58f,775
-- completed:
-    hackage: hlint-3.3.4@sha256:68cdef430efc8f2769cbba0175a1dae22f9fbee45591c154af188bb9b0560182,4198
-    pantry-tree:
-      size: 5583
-      sha256: 2fcf3924f00c6ac3428e5ef4ae2417c38349a500ce7bbe796b08d41ef983b9cd
-  original:
-    hackage: hlint-3.3.4@sha256:68cdef430efc8f2769cbba0175a1dae22f9fbee45591c154af188bb9b0560182,4198
 snapshots:
 - completed:
-    size: 586292
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/17.yaml
-    sha256: e66e70a7f998036025e8f40abc89b8eeb79c88f57727020cba1b54f375aa7ca0
-  original: lts-18.17
+    size: 586296
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/18.yaml
+    sha256: 63539429076b7ebbab6daa7656cfb079393bf644971156dc349d7c0453694ac2
+  original: lts-18.18
