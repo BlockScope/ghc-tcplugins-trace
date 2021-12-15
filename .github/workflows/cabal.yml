@@ -43,7 +43,11 @@ jobs:
       run: |
         cabal v2-update
         cabal v2-build all:libs
-        cabal v2-build ghc-tcplugins-trace:hlint --enable-tests
+
+    - name: build hlint
+      if: ${{ matrix.ghc == '8.10.7' }}
+      run: cabal v2-build ghc-tcplugins-trace:hlint --enable-tests
 
     - name: test ghc-tcplugins-trace:hlint
+      if: ${{ matrix.ghc == '8.10.7' }}
       run: cabal v2-test ghc-tcplugins-trace:hlint --test-show-details=direct --test-option="--color=always"
