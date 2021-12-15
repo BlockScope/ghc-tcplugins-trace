@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7b96346e71aa508016c3298dc14c4c69e830975e5a8ffce6bf469186bd357f6d
+-- hash: 65ac1915327cfd422c83c47b8cc9d34fdb9b5d5948cefa011fe8d6c010c675bf
 
 name:           ghc-tcplugins-trace
 version:        0.1.0.0
@@ -61,4 +61,6 @@ test-suite hlint
     , hlint
     , template-haskell >=2.9
     , th-printf
+  if impl(ghc > 9.0)
+    buildable: False
   default-language: Haskell2010

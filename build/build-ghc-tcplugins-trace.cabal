@@ -28,7 +28,6 @@ executable build-ghc-tcplugins-trace
   build-depends:
       ansi-terminal
     , base
-    , dhall
     , raw-strings-qq
     , shake
     , text

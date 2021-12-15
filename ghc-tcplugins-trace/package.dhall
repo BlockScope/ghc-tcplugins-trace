@@ -30,5 +30,6 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
             , ghc-options = [ "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
             , main = "HLint.hs"
             , source-dirs = "test-suite-hlint"
+            , when = { condition = "impl(ghc > 9.0)", buildable = False }
             }
           }
