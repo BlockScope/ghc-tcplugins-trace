@@ -13,7 +13,7 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
           , dependencies =
                 defs.dependencies
               # [ "containers"
-                , "ghc-tcplugins-extra >=0.5"
+                , "ghc-tcplugins-extra"
                 , "ghc-corroborate"
                 , "template-haskell >=2.9"
                 , "ghc-prim"

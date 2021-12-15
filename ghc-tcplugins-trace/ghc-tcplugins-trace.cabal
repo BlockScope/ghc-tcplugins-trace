@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 43d61b037caa8eb2cab3412d77d07eec1b89723b1f7a93425527ceb998d74770
+-- hash: 0f5b144ec7fc3f53fde42475b2e867ef2502f5d7c05709ae3bc73146995b2420
 
 name:           ghc-tcplugins-trace
 version:        0.1.0.0
@@ -46,7 +46,7 @@ library
     , containers
     , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-extra >=0.5
+    , ghc-tcplugins-extra
     , hashable
     , mtl
     , simple-smt
@@ -70,7 +70,7 @@ test-suite hlint
     , containers
     , ghc-corroborate
     , ghc-prim
-    , ghc-tcplugins-extra >=0.5
+    , ghc-tcplugins-extra
     , hashable
     , hlint
     , mtl

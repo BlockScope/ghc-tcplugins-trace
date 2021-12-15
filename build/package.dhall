@@ -3,7 +3,7 @@
   , synopsis = "A shake build of uom-plugin."
   , description = "Builds the packages making up uom-plugin."
   , category = "Build"
-  , executables.build-uom-plugin
+  , executables.build-plugins-for-blobs
     =
     { dependencies =
       [ "base"

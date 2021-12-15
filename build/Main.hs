@@ -28,8 +28,6 @@ dhallPkgs = fst <$> dhallCabal
 dhallCabal :: [(Folder, Pkg)]
 dhallCabal =
     [ ("build", "build-plugins-for-blobs")
-    , ("ghc-corroborate", "ghc-corroborate")
-    , ("ghc-tcplugins-extra", "ghc-tcplugins-extra")
     , ("ghc-tcplugins-trace", "ghc-tcplugins-trace")
     , ("thoralf", "thoralf-plugin")
     , ("uom-plugin", "uom-plugin")
