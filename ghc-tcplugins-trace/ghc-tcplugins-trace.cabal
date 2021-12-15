@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0017d600b5638e636077e378918c3ed1d9da1fd4c6446095766fa4e56d64b87c
+-- hash: 1e857233e36f3d30ff6924326aff65f8e247c748cd090357cb9ea46e8c9e3bfe
 
 name:           ghc-tcplugins-trace
 version:        0.1.0.0
@@ -25,10 +25,6 @@ source-repository head
   type: git
   location: https://github.com/blockscope/ghc-tcplugins-trace
 
-flag suppress-failing-tests
-  manual: False
-  default: True
-
 library
   exposed-modules:
       Plugins.Print.Constraints
@@ -37,7 +33,7 @@ library
       src
   ghc-options: -Wall -fno-warn-partial-type-signatures
   build-depends:
-      base
+      base >=4.9.1.0 && <5
     , containers
     , ghc-corroborate
     , hashable

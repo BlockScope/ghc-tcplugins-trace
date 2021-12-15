@@ -13,6 +13,5 @@
   , "-Wredundant-constraints"
   , "-fhide-source-paths"
   ]
-, dependencies = [ "base" ]
-, flags.suppress-failing-tests = { manual = False, default = True }
+, dependencies = [ "base >=4.9.1.0 && <5" ]
 }
