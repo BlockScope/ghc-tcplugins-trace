@@ -42,4 +42,4 @@ jobs:
       run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
     - name: test ghc-tcplugins-trace:hlint
-      run: stack test uom-plugin-tutorial --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+      run: stack test ghc-tcplugins-trace:hlint --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
