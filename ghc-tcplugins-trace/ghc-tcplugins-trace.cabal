@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0f5b144ec7fc3f53fde42475b2e867ef2502f5d7c05709ae3bc73146995b2420
+-- hash: 7b96346e71aa508016c3298dc14c4c69e830975e5a8ffce6bf469186bd357f6d
 
 name:           ghc-tcplugins-trace
 version:        0.1.0.0
@@ -35,26 +35,14 @@ library
       Plugins.Print
   hs-source-dirs:
       src
-  other-extensions:
-      TypeFamilies
-      TypeInType
-      GADTs
-      RecordWildCards
   ghc-options: -Wall -fno-warn-partial-type-signatures
   build-depends:
       base
     , containers
     , ghc-corroborate
-    , ghc-prim
-    , ghc-tcplugins-extra
     , hashable
-    , mtl
-    , simple-smt
     , template-haskell >=2.9
     , th-printf
-    , units-parser >=0.1
-    , uom-quantity
-    , uom-th
   default-language: Haskell2010
 
 test-suite hlint
@@ -69,15 +57,8 @@ test-suite hlint
       base
     , containers
     , ghc-corroborate
-    , ghc-prim
-    , ghc-tcplugins-extra
     , hashable
     , hlint
-    , mtl
-    , simple-smt
     , template-haskell >=2.9
     , th-printf
-    , units-parser >=0.1
-    , uom-quantity
-    , uom-th
   default-language: Haskell2010

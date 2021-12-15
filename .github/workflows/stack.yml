@@ -1,0 +1,45 @@
+name: stack
+
+on:
+  push:
+    branches: [ci-stack, wip/thoralf]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        cabal: ["3.4"]
+        ghc:
+          - "8.2.2"
+          - "8.4.4"
+          - "8.6.5"
+          - "8.8.4"
+          - "8.10.7"
+          - "9.0.1"
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - uses: haskell/actions/setup@v1
+      name: Setup Stack
+      with:
+        enable-stack: true
+        stack-version: 'latest'
+        cabal-version: ${{ matrix.cabal }}
+
+    - uses: actions/cache@v2
+      name: Cache ~/.stack
+      with:
+        path: ~/.stack
+        key: ${{ runner.os }}-${{ matrix.ghc }}-stack
+
+    - name: build tests
+      run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+
+    - name: test ghc-tcplugins-trace:hlint
+      run: stack test uom-plugin-tutorial --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml

@@ -13,24 +13,16 @@ in  let testopts = [ "-Wall", "-rtsopts", "-threaded", "-with-rtsopts=-N" ]
           , dependencies =
                 defs.dependencies
               # [ "containers"
-                , "ghc-tcplugins-extra"
                 , "ghc-corroborate"
                 , "template-haskell >=2.9"
-                , "ghc-prim"
                 , "hashable"
-                , "mtl"
-                , "simple-smt"
                 , "th-printf"
-                , "uom-quantity"
-                , "uom-th"
-                , "units-parser >=0.1"
                 ]
           , library =
             { source-dirs = "src"
             , exposed-modules = [ "Plugins.Print.Constraints", "Plugins.Print" ]
             , other-modules = [] : List Text
-            , other-extensions =
-              [ "TypeFamilies", "TypeInType", "GADTs", "RecordWildCards" ]
+            , other-extensions = [] : List Text
             }
           , tests.hlint
             =

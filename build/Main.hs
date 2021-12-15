@@ -27,15 +27,8 @@ dhallPkgs = fst <$> dhallCabal
 -- name.
 dhallCabal :: [(Folder, Pkg)]
 dhallCabal =
-    [ ("build", "build-plugins-for-blobs")
+    [ ("build", "build-ghc-tcplugins-trace")
     , ("ghc-tcplugins-trace", "ghc-tcplugins-trace")
-    , ("thoralf", "thoralf-plugin")
-    , ("uom-plugin", "uom-plugin")
-    , ("uom-plugin-defs", "uom-plugin-defs")
-    , ("uom-plugin-examples", "uom-plugin-examples")
-    , ("uom-plugin-tutorial", "uom-plugin-tutorial")
-    , ("uom-quantity", "uom-quantity")
-    , ("uom-th", "uom-th")
     ]
 
 dhallRootImports :: [String]

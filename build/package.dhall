@@ -1,9 +1,9 @@
   ./../defaults.dhall
-⫽ { name = "build-plugins-for-blobs"
-  , synopsis = "A shake build of uom-plugin."
-  , description = "Builds the packages making up uom-plugin."
+⫽ { name = "build-ghc-tcplugins-trace"
+  , synopsis = "A shake build of ghc-tcplugins-trace."
+  , description = "Builds the packages making up ghc-tcplugins-trace."
   , category = "Build"
-  , executables.build-plugins-for-blobs
+  , executables.build-ghc-tcplugins-trace
     =
     { dependencies =
       [ "base"

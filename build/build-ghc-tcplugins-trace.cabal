@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 
-name:           build-plugins-for-blobs
+name:           build-ghc-tcplugins-trace
 version:        0.3.0.1
-synopsis:       A shake build of uom-plugin.
-description:    Builds the packages making up uom-plugin.
+synopsis:       A shake build of ghc-tcplugins-trace.
+description:    Builds the packages making up ghc-tcplugins-trace.
 category:       Build
 author:         Adam Gundry <adam@well-typed.com>
 maintainer:     Adam Gundry <adam@well-typed.com>
@@ -18,10 +18,10 @@ tested-with:
 extra-source-files:
     package.dhall
 
-executable build-plugins-for-blobs
+executable build-ghc-tcplugins-trace
   main-is: Main.hs
   other-modules:
-      Paths_build_plugins_for_blobs
+      Paths_build_ghc_tcplugins_trace
   hs-source-dirs:
       ./
   ghc-options: -rtsopts -threaded -with-rtsopts=-N
