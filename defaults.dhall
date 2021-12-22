@@ -1,20 +1,21 @@
-{ version = "0.3.0.1"
-, author = "Adam Gundry <adam@well-typed.com>"
-, maintainer = "Adam Gundry <adam@well-typed.com>"
-, copyright = "Copyright (c) 2014-2018, Adam Gundry"
+{ version = "0.1.0"
+, author = "Phil de Joux"
+, maintainer = "phil.dejoux@blockscope.com"
+, copyright = "© 2017-2021 Phil de Joux, © 2017-2021 Block Scope Limited"
+, git = "https://github.com/BlockScope/ghc-tcplugins-trace.git"
+, bug-reports = "https://github.com/blockscope/ghc-tcplugins-trace/issues"
+, license = "MPL-2.0"
+, license-file = "LICENSE.md"
 , tested-with =
-    "GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.3"
+    "GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.4, GHC == 8.10.7, GHC == 9.0.1"
 , extra-source-files = "package.dhall"
-, dependencies = [ "base >=4.9.1.0 && <5" ]
-, when =
-  { condition = "impl(ghc >= 8.8.0)"
-  , `then`.ghc-options
-    =
-    [ "-Wall"
-    , "-fno-warn-unticked-promoted-constructors"
-    , "-fwrite-ide-info"
-    , "-hiedir=../.hie"
-    ]
-  , `else`.ghc-options = [ "-Wall", "-fno-warn-unticked-promoted-constructors" ]
-  }
+, ghc-options =
+  [ "-Wall"
+  , "-Werror"
+  , "-Wincomplete-uni-patterns"
+  , "-Wcompat"
+  , "-Widentities"
+  , "-Wredundant-constraints"
+  , "-fhide-source-paths"
+  ]
 }

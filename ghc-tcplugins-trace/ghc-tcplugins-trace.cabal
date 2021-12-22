@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.5.
+-- This file has been generated from package.dhall by hpack version 0.34.6.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1e857233e36f3d30ff6924326aff65f8e247c748cd090357cb9ea46e8c9e3bfe
+-- hash: bf1773cb0a84159fe6c885e5f3a77400bae34b8dde17bbcbaf040f0abf369a0b
 
 name:           ghc-tcplugins-trace
 version:        0.1.0.0
@@ -39,24 +39,4 @@ library
     , hashable
     , template-haskell >=2.9
     , th-printf
-  default-language: Haskell2010
-
-test-suite hlint
-  type: exitcode-stdio-1.0
-  main-is: HLint.hs
-  other-modules:
-      Paths_ghc_tcplugins_trace
-  hs-source-dirs:
-      test-suite-hlint
-  ghc-options: -Wall -fno-warn-partial-type-signatures -rtsopts -threaded -with-rtsopts=-N
-  build-depends:
-      base
-    , containers
-    , ghc-corroborate
-    , hashable
-    , hlint
-    , template-haskell >=2.9
-    , th-printf
-  if impl(ghc >= 9.2)
-    buildable: False
   default-language: Haskell2010

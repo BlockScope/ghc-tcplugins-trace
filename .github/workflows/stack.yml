@@ -33,14 +33,22 @@ jobs:
         stack-version: 'latest'
         cabal-version: ${{ matrix.cabal }}
 
+    - uses: rwe/actions-hlint-setup@v1
+      name: Set up HLint
+      with:
+        version: "3.3.4"
+
     - uses: actions/cache@v2
       name: Cache ~/.stack
       with:
         path: ~/.stack
         key: ${{ runner.os }}-${{ matrix.ghc }}-stack
 
-    - name: build tests
-      run: stack test --no-run-tests --no-terminal --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+    - name: build
+      run: stack build --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
 
-    - name: test ghc-tcplugins-trace:hlint
-      run: stack test ghc-tcplugins-trace:hlint --no-terminal --test-arguments "--color=always" --stack-yaml=./stack/stack-${{ matrix.ghc }}.yaml
+    - uses: rwe/actions-hlint-run@v2
+      name: hlint
+      with:
+        path: '["ghc-tcplugins-trace"]'
+        fail-on: suggestion
