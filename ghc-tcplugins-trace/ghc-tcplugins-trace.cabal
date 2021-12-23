@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: bf1773cb0a84159fe6c885e5f3a77400bae34b8dde17bbcbaf040f0abf369a0b
+-- hash: 6d4256f73eb20fb8f3e48ee4529e024a72dae8c32a19c8afbe8d84172148567f
 
 name:           ghc-tcplugins-trace
 version:        0.1.0.0
@@ -27,8 +27,10 @@ source-repository head
 
 library
   exposed-modules:
-      Plugins.Print.Constraints
       Plugins.Print
+  other-modules:
+      Plugins.Print.Flags
+      Plugins.Print.Constraints
   hs-source-dirs:
       src
   ghc-options: -Wall -fno-warn-partial-type-signatures

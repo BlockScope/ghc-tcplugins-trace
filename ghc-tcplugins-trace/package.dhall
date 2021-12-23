@@ -18,8 +18,8 @@ in    defs
             ]
       , library =
         { source-dirs = "src"
-        , exposed-modules = [ "Plugins.Print.Constraints", "Plugins.Print" ]
-        , other-modules = [] : List Text
+        , exposed-modules = [ "Plugins.Print" ]
+        , other-modules = [ "Plugins.Print.Flags", "Plugins.Print.Constraints" ]
         , other-extensions = [] : List Text
         }
       }

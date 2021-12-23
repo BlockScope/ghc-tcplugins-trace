@@ -2,21 +2,14 @@
 {-# OPTIONS_GHC -Wno-orphans #-}
 
 module Plugins.Print.Constraints
-    ( -- * Trace Control Flags
-      TraceCallCount(..), TraceCts(..)
-      -- * Pretty Printing
-    , pprList, pprSolverCallCount, pprCts
+    ( -- * Pretty Printing
+      pprList, pprSolverCallCount, pprCts
     ) where
 
 import Language.Haskell.Printf (s)
 import Data.List (intercalate)
 import GHC.Corroborate
-
--- | Flag for controlling tracing counts of each time the plugin is called.
-newtype TraceCallCount = TraceCallCount Bool
-
--- | Flag for controlling tracing of type checking constraints.
-newtype TraceCts = TraceCts Bool
+import Plugins.Print.Flags (TraceCallCount(..))
 
 -- | Pretty print a list.
 pprList :: Show a => [a] -> String

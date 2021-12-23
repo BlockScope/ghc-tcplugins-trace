@@ -2,39 +2,25 @@
 
 module Plugins.Print
     ( -- * Trace Control Flags
-      TracingFlags(..)
+      TraceCallCount(..)
+    , TraceCts(..)
     , TraceCarry(..)
     , TraceSolution(..)
+    , TracingFlags(..)
       -- * Pretty Printing
     , pprCtsStepProblem
     , pprCtsStepSolution
     , tracePlugin
+      -- * Pretty Printing Constraints
+    , module Plugins.Print.Constraints
     ) where
 
 import Data.Coerce (coerce)
 import Language.Haskell.Printf (s)
 import GHC.Corroborate (Ct, TcPluginM, TcPluginResult(..), tcPluginIO)
 
-import Plugins.Print.Constraints (TraceCallCount(..), TraceCts(..), pprList)
-
--- | Flag for controlling tracing of the carry.
-newtype TraceCarry = TraceCarry Bool
-
--- | Flag for controlling tracing of the solution of type checking.
-newtype TraceSolution = TraceSolution Bool
-
--- | A group of flags for tracing.
-data TracingFlags =
-    TracingFlags
-        { traceCallCount :: TraceCallCount
-        -- ^ Trace TcPlugin call count.
-        , traceCts :: TraceCts
-        -- ^ Trace GHC constraints.
-        , traceCarry :: TraceCarry
-        -- ^ Trace GHC constraints carried through conversion and solving.
-        , traceSolution :: TraceSolution
-        -- ^ Trace the solution, the @TcPluginResult@.
-        }
+import Plugins.Print.Constraints
+import Plugins.Print.Flags
 
 -- | If tracing constraints, pretty print them.
 pprCtsStepProblem
