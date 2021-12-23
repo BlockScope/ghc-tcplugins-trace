@@ -16,7 +16,7 @@ import Language.Haskell.Printf (s)
 -- | Flag for controlling tracing counts of each time the plugin is called.
 newtype TraceCallCount = TraceCallCount Bool
 
--- | Pretty print the call count if tracing them.
+-- | Pretty print the calls of this plugin as a count if tracing calls.
 pprSolverCallCount :: TraceCallCount -> Int -> String
 pprSolverCallCount (TraceCallCount callCount) n
     | callCount = [s|>>> GHC-TcPlugin #%d|] n

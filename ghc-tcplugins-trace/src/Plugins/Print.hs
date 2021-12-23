@@ -8,6 +8,7 @@ module Plugins.Print
     , TraceSolution(..)
     , TracingFlags(..)
       -- * Pretty Printing
+    , pprSolverCallCount
     , pprCtsStepProblem
     , pprCtsStepSolution
     , pprCts
