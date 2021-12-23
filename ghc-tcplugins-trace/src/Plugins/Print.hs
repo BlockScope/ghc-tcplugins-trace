@@ -1,26 +1,31 @@
 {-# LANGUAGE QuasiQuotes, RecordWildCards #-}
 
 module Plugins.Print
-    ( DebugPlugin(..)
+    ( -- * Trace Control Flags
+      TracingFlags(..)
     , TraceCarry(..)
     , TraceSolution(..)
+      -- * Pretty Printing
     , pprCtsStepProblem
     , pprCtsStepSolution
     , tracePlugin
     ) where
 
-import Prelude hiding (showList)
 import Data.Coerce (coerce)
 import Language.Haskell.Printf (s)
 import GHC.Corroborate (Ct, TcPluginM, TcPluginResult(..), tcPluginIO)
 
-import Plugins.Print.Constraints (TraceCallCount(..), TraceCts(..), showList)
+import Plugins.Print.Constraints (TraceCallCount(..), TraceCts(..), pprList)
 
+-- | Flag for controlling tracing of the carry.
 newtype TraceCarry = TraceCarry Bool
+
+-- | Flag for controlling tracing of the solution of type checking.
 newtype TraceSolution = TraceSolution Bool
 
-data DebugPlugin =
-    DebugPlugin
+-- | A group of flags for tracing.
+data TracingFlags =
+    TracingFlags
         { traceCallCount :: TraceCallCount
         -- ^ Trace TcPlugin call count.
         , traceCts :: TraceCts
@@ -31,34 +36,37 @@ data DebugPlugin =
         -- ^ Trace the solution, the @TcPluginResult@.
         }
 
+-- | If tracing constraints, pretty print them.
 pprCtsStepProblem
-    :: DebugPlugin
+    :: TracingFlags
     -> Maybe String
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
-pprCtsStepProblem DebugPlugin{..} intro gCts dCts wCts = maybe [] return intro ++
+pprCtsStepProblem TracingFlags{..} intro gCts dCts wCts = maybe [] return intro ++
     if not (coerce traceCts) then [] else
-    [ [s|+++ GHC-Decs-Given = %s|] $ showList gCts
-    , [s|+++ GHC-Decs-Derived = %s|] $ showList dCts
-    , [s|+++ GHC-Decs-Wanted = %s|] $ showList wCts
+    [ [s|+++ GHC-Decs-Given = %s|] $ pprList gCts
+    , [s|+++ GHC-Decs-Derived = %s|] $ pprList dCts
+    , [s|+++ GHC-Decs-Wanted = %s|] $ pprList wCts
     ]
 
-pprCtsStepSolution :: DebugPlugin -> TcPluginResult -> [String]
-pprCtsStepSolution DebugPlugin{..} x =
+-- | If tracing the solution, pretty print it.
+pprCtsStepSolution :: TracingFlags -> TcPluginResult -> [String]
+pprCtsStepSolution TracingFlags{..} x =
     if not (coerce traceSolution) then [] else
     case x of
         TcPluginContradiction cs ->
-            [ [s|!!! SOLVE-Contradiction = %s|] $ showList cs ]
+            [ [s|!!! SOLVE-Contradiction = %s|] $ pprList cs ]
 
         TcPluginOk solved newCts ->
-            [ [s|=== SOLVE-Solved = %s|] $ showList solved
-            , [s|=== SOLVE-New-Wanted = %s|] $ showList newCts
+            [ [s|=== SOLVE-Solved = %s|] $ pprList solved
+            , [s|=== SOLVE-New-Wanted = %s|] $ pprList newCts
             ]
 
-tracePlugin :: DebugPlugin -> String -> TcPluginM ()
-tracePlugin DebugPlugin{..} s'
+-- | Trace the given string if any of the tracing flags are switched on.
+tracePlugin :: TracingFlags -> String -> TcPluginM ()
+tracePlugin TracingFlags{..} s'
     | coerce traceCallCount
         || coerce traceCts
         || coerce traceCarry

@@ -2,32 +2,44 @@
 {-# OPTIONS_GHC -Wno-orphans #-}
 
 module Plugins.Print.Constraints
-    ( TraceCallCount(..), TraceCts(..)
-    , showList, pprSolverCallCount, pprCts
+    ( -- * Trace Control Flags
+      TraceCallCount(..), TraceCts(..)
+      -- * Pretty Printing
+    , pprList, pprSolverCallCount, pprCts
     ) where
 
-import Prelude hiding (showList)
 import Language.Haskell.Printf (s)
 import Data.List (intercalate)
 import GHC.Corroborate
 
+-- | Flag for controlling tracing counts of each time the plugin is called.
 newtype TraceCallCount = TraceCallCount Bool
+
+-- | Flag for controlling tracing of type checking constraints.
 newtype TraceCts = TraceCts Bool
 
+-- | Pretty print a list.
+pprList :: Show a => [a] -> String
+pprList [] = "[]"
+pprList xs = "[\n" ++ intercalate "\n" (show <$> xs) ++ "\n]"
+
+-- | Pretty print the call count if tracing them.
 pprSolverCallCount :: TraceCallCount -> Int -> String
 pprSolverCallCount (TraceCallCount callCount) n
     | callCount = [s|>>> GHC-TcPlugin #%d|] n
     | otherwise = ""
 
+-- | Pretty print the constraints as a list of lists in the order of given,
+-- derived and wanted.
 pprCts
     :: [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
 pprCts gs ds ws =
-    [ [s|>>> GHC-Givens = %s|] $ showList gs
-    , [s|>>> GHC-Derived = %s|] $ showList ds
-    , [s|>>> GHC-Wanteds = %s|] $ showList ws
+    [ [s|>>> GHC-Givens = %s|] $ pprList gs
+    , [s|>>> GHC-Derived = %s|] $ pprList ds
+    , [s|>>> GHC-Wanteds = %s|] $ pprList ws
     ]
 
 maybeExtractTyEq :: Ct -> Maybe ((Type, Type), Ct)
@@ -36,7 +48,6 @@ maybeExtractTyEq ct =
         EqPred NomEq t1 t2 -> return ((t1, t2), ct)
         _ -> Nothing
 
--- *  Printing
 instance Show Type where
     show ty = case splitTyConApp_maybe ty of
         Just (tcon, tys) -> show tcon ++ " " ++ show tys
@@ -62,10 +73,6 @@ classifyVar :: Var -> String
 classifyVar v
     | isTcTyVar v = if isMetaTyVar v then "t" else "s"
     | otherwise = "irr"
-
-showList :: Show a => [a] -> String
-showList [] = "[]"
-showList xs = "[\n" ++ intercalate "\n" (show <$> xs) ++ "\n]"
 
 instance Show Ct where
     show ct = case maybeExtractTyEq ct of
