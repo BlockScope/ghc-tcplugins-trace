@@ -1,26 +1,16 @@
 {-# LANGUAGE QuasiQuotes #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
-module Plugins.Print.Constraints
-    ( -- * Pretty Printing
-      pprList, pprSolverCallCount, pprCts
-    ) where
+module Plugins.Print.Constraints (pprList, pprCts) where
 
 import Language.Haskell.Printf (s)
 import Data.List (intercalate)
 import GHC.Corroborate
-import Plugins.Print.Flags (TraceCallCount(..))
 
 -- | Pretty print a list.
 pprList :: Show a => [a] -> String
 pprList [] = "[]"
 pprList xs = "[\n" ++ intercalate "\n" (show <$> xs) ++ "\n]"
-
--- | Pretty print the call count if tracing them.
-pprSolverCallCount :: TraceCallCount -> Int -> String
-pprSolverCallCount (TraceCallCount callCount) n
-    | callCount = [s|>>> GHC-TcPlugin #%d|] n
-    | otherwise = ""
 
 -- | Pretty print the constraints as a list of lists in the order of given,
 -- derived and wanted.

@@ -1,7 +1,7 @@
 {-# LANGUAGE QuasiQuotes, RecordWildCards #-}
 
 module Plugins.Print
-    ( -- * Trace Control Flags
+    ( -- * Flags
       TraceCallCount(..)
     , TraceCts(..)
     , TraceCarry(..)
@@ -10,16 +10,15 @@ module Plugins.Print
       -- * Pretty Printing
     , pprCtsStepProblem
     , pprCtsStepSolution
+    , pprCts
     , tracePlugin
-      -- * Pretty Printing Constraints
-    , module Plugins.Print.Constraints
     ) where
 
 import Data.Coerce (coerce)
 import Language.Haskell.Printf (s)
 import GHC.Corroborate (Ct, TcPluginM, TcPluginResult(..), tcPluginIO)
 
-import Plugins.Print.Constraints
+import Plugins.Print.Constraints (pprList, pprCts)
 import Plugins.Print.Flags
 
 -- | If tracing constraints, pretty print them.

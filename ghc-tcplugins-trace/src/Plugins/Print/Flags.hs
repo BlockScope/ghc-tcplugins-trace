@@ -1,14 +1,26 @@
+{-# LANGUAGE QuasiQuotes #-}
+
 module Plugins.Print.Flags
-    ( -- * Trace Control Flags
+    ( -- * Flags
       TraceCallCount(..)
     , TraceCts(..)
     , TraceCarry(..)
     , TraceSolution(..)
     , TracingFlags(..)
+      -- * Pretty Printing
+    , pprSolverCallCount 
     ) where
+
+import Language.Haskell.Printf (s)
 
 -- | Flag for controlling tracing counts of each time the plugin is called.
 newtype TraceCallCount = TraceCallCount Bool
+
+-- | Pretty print the call count if tracing them.
+pprSolverCallCount :: TraceCallCount -> Int -> String
+pprSolverCallCount (TraceCallCount callCount) n
+    | callCount = [s|>>> GHC-TcPlugin #%d|] n
+    | otherwise = ""
 
 -- | Flag for controlling tracing of type checking constraints.
 newtype TraceCts = TraceCts Bool
