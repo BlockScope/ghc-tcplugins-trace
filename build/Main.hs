@@ -12,8 +12,8 @@ main = shakeArgs shakeOptions $ do
     sequence_ $ formatPkg <$> dhallPkgs
     sequence_ $ hpack <$> dhallPkgs
     sequence_ $ cabal <$> dhallCabal
-    phony "dhall-format" $ need $ (\x -> "dhall-format-" ++ x) <$> dhallPkgs ++ dhallRootImports
-    phony "hpack-dhall" $ need $ (\x -> "hpack-dhall-" ++ x) <$> dhallPkgs
+    phony "dhall-format" $ need $ ("dhall-format-" ++) <$> dhallPkgs ++ dhallRootImports
+    phony "hpack-dhall" $ need $ ("hpack-dhall-" ++) <$> dhallPkgs
     phony "cabal-files" $ need $ (\(x, y) -> x </> y <.> "cabal") <$> dhallCabal
 
 type Folder = String
@@ -48,7 +48,7 @@ hpack :: Folder -> Rules ()
 hpack folder =
     phony ("hpack-dhall-" ++ folder) $ do
         need ["dhall-format-" ++ folder]
-        cmd (Cwd folder) Shell ("dhall-hpack-cabal --package-dhall=package.dhall")
+        cmd (Cwd folder) Shell "dhall-hpack-cabal --package-dhall=package.dhall"
 
 cabal :: (Folder, Pkg) -> Rules ()
 cabal (folder, pkg) =
