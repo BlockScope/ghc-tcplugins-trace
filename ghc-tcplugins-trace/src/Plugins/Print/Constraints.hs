@@ -4,13 +4,26 @@
 module Plugins.Print.Constraints (pprList, pprCts) where
 
 import Language.Haskell.Printf (s)
-import Data.List (intercalate)
 import GHC.Corroborate
 
--- | Pretty print a list.
+-- | Pretty print a list using leading commas with each element on its own line.
+--
+-- >>> putStrLn $ pprList [1..3]
+-- [ 1
+-- , 2
+-- , 3
+-- ]
 pprList :: Show a => [a] -> String
-pprList [] = "[]"
-pprList xs = "[\n" ++ intercalate "\n" (show <$> xs) ++ "\n]"
+pprList xs = go xs "" where
+    go :: Show a => [a] -> ShowS
+    go [] = showString ""
+    go (y : ys) =
+        showString "[ "
+        . shows y
+        . foldr
+            (\e m -> showString "\n, " . shows e . m)
+            (showString "\n]")
+            ys
 
 -- | Pretty print the constraints as a list of lists in the order of given,
 -- derived and wanted.
