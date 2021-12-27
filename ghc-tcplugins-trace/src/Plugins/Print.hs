@@ -1,4 +1,4 @@
-{-# LANGUAGE QuasiQuotes, RecordWildCards #-}
+{-# LANGUAGE RecordWildCards #-}
 
 module Plugins.Print
     ( -- * Flags
@@ -17,11 +17,13 @@ module Plugins.Print
     ) where
 
 import Data.Coerce (coerce)
-import Language.Haskell.Printf (s)
 import GHC.Corroborate (Ct, TcPluginM, TcPluginResult(..), tcPluginIO)
 
 import Plugins.Print.Constraints (pprList, pprCts)
 import Plugins.Print.Flags
+
+tab :: String
+tab = "    " 
 
 -- | If tracing constraints, pretty print them.
 pprCtsStepProblem
@@ -32,11 +34,7 @@ pprCtsStepProblem
     -> [Ct] -- ^ Wanted constraints
     -> [String]
 pprCtsStepProblem TracingFlags{..} intro gCts dCts wCts = maybe [] return intro ++
-    if not (coerce traceCts) then [] else
-    [ [s|+++ GHC-Decs-Given = %s|] $ pprList gCts
-    , [s|+++ GHC-Decs-Derived = %s|] $ pprList dCts
-    , [s|+++ GHC-Decs-Wanted = %s|] $ pprList wCts
-    ]
+    if not (coerce traceCts) then [] else pprCts gCts dCts wCts
 
 -- | If tracing the solution, pretty print it.
 pprCtsStepSolution :: TracingFlags -> TcPluginResult -> [String]
@@ -44,11 +42,27 @@ pprCtsStepSolution TracingFlags{..} x =
     if not (coerce traceSolution) then [] else
     case x of
         TcPluginContradiction cs ->
-            [ [s|!!! SOLVE-Contradiction = %s|] $ pprList cs ]
+            [
+                ( showString "  [solve]"
+                . showString "\n"
+                . showString tab
+                . showString "contradiction = "
+                . pprList 2 cs)
+                ""
+            ]
 
         TcPluginOk solved newCts ->
-            [ [s|=== SOLVE-Solved = %s|] $ pprList solved
-            , [s|=== SOLVE-New-Wanted = %s|] $ pprList newCts
+            [
+                ( showString "  [solve]"
+                . showString "\n"
+                . showString tab
+                . showString "solution = "
+                . pprList 2 solved
+                . showString "\n"
+                . showString tab
+                . showString "new-wanted = "
+                . pprList 2 newCts)
+                ""
             ]
 
 -- | Trace the given string if any of the tracing flags are switched on.

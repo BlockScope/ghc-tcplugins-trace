@@ -1,9 +1,7 @@
-{-# LANGUAGE QuasiQuotes #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
 module Plugins.Print.Constraints (pprList, pprCts) where
 
-import Language.Haskell.Printf (s)
 import GHC.Corroborate
 
 -- | Pretty print a list using leading commas with each element on its own line.
@@ -13,16 +11,22 @@ import GHC.Corroborate
 -- , 2
 -- , 3
 -- ]
-pprList :: Show a => [a] -> String
-pprList xs = go xs "" where
+pprList :: Show a => Int -> [a] -> ShowS
+pprList indent xs = go xs where
+    tab = replicate indent ' '
+
     go :: Show a => [a] -> ShowS
-    go [] = showString ""
+    go [] = showString "[]"
+    go [y] = showString "[ " . shows y . showString " ]"
     go (y : ys) =
         showString "[ "
+        . showString "\n"
+        . showString tab
+        . showString "  "
         . shows y
         . foldr
-            (\e m -> showString "\n, " . shows e . m)
-            (showString "\n]")
+            (\e m -> showString "\n" . showString tab . showString ", " . shows e . m)
+            (showString "\n" . showString tab . showString "]")
             ys
 
 -- | Pretty print the constraints as a list of lists in the order of given,
@@ -32,10 +36,22 @@ pprCts
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
-pprCts gs ds ws =
-    [ [s|>>> GHC-Givens = %s|] $ pprList gs
-    , [s|>>> GHC-Derived = %s|] $ pprList ds
-    , [s|>>> GHC-Wanteds = %s|] $ pprList ws
+pprCts gCts dCts wCts = let tab = "    " in
+    [
+        ( showString "  [constraints]"
+        . showString "\n"
+        . showString tab
+        . showString "given = "
+        . pprList 4 gCts
+        . showString "\n"
+        . showString tab
+        . showString "derived = "
+        . pprList 4 dCts
+        . showString "\n"
+        . showString tab
+        . showString "wanted = "
+        . pprList 4 wCts)
+        ""
     ]
 
 maybeExtractTyEq :: Ct -> Maybe ((Type, Type), Ct)

@@ -10,11 +10,7 @@ in    defs
       , ghc-options = [ "-Wall", "-fno-warn-partial-type-signatures" ]
       , dependencies =
             defs.dependencies
-          # [ "containers"
-            , "ghc-corroborate"
-            , "template-haskell >=2.9"
-            , "hashable"
-            , "th-printf"
+          # [ "ghc-corroborate"
             ]
       , library =
         { source-dirs = "src"
