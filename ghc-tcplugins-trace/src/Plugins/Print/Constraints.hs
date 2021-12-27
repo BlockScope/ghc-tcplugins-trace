@@ -62,7 +62,11 @@ maybeExtractTyEq ct =
 
 instance Show Type where
     show ty = case splitTyConApp_maybe ty of
-        Just (tcon, tys) -> show tcon ++ " " ++ show tys
+        Just (tcon, tys) ->
+            ( shows tcon
+            . showString " "
+            . shows tys)
+            ""
         Nothing -> case getTyVar_maybe ty of
             Just var -> show var
             Nothing -> showSDocUnsafe $ ppr ty
@@ -72,8 +76,12 @@ instance Show TyCon where
 
 instance Show Var where
     show v =
-        let nicename = varOccName v ++ ";" ++ varUnique v in
-        nicename ++ ":" ++ classifyVar v
+        ( showString (varOccName v)
+        . showString ";"
+        . showString (varUnique v)
+        . showString ":"
+        . showString (classifyVar v))
+        ""
 
 varOccName :: Var -> String
 varOccName = showSDocUnsafe . ppr . getOccName
