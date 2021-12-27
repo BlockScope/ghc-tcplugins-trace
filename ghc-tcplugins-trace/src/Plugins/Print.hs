@@ -47,7 +47,7 @@ pprCtsStepSolution TracingFlags{..} x =
                 . showString "\n"
                 . showString tab
                 . showString "contradiction = "
-                . pprList 2 cs)
+                . pprList 4 cs)
                 ""
             ]
 
@@ -57,11 +57,11 @@ pprCtsStepSolution TracingFlags{..} x =
                 . showString "\n"
                 . showString tab
                 . showString "solution = "
-                . pprList 2 solved
+                . pprList 4 solved
                 . showString "\n"
                 . showString tab
                 . showString "new-wanted = "
-                . pprList 2 newCts)
+                . pprList 4 newCts)
                 ""
             ]
 
