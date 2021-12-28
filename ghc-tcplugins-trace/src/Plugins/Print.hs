@@ -8,6 +8,7 @@ module Plugins.Print
     , TraceSolution(..)
     , TracingFlags(..)
       -- * Pretty Printing
+    , Indent(..)
     , pprList
     , pprSolverCallCount
     , pprCtsStepProblem
@@ -19,51 +20,55 @@ module Plugins.Print
 import Data.Coerce (coerce)
 import GHC.Corroborate (Ct, TcPluginM, TcPluginResult(..), tcPluginIO)
 
-import Plugins.Print.Constraints (pprList, pprCts)
+import Plugins.Print.Constraints (Indent(..), pprList, pprCts)
 import Plugins.Print.Flags
-
-tab :: String
-tab = "    " 
 
 -- | If tracing constraints, pretty print them.
 pprCtsStepProblem
-    :: TracingFlags
+    :: Indent
+    -> TracingFlags
     -> Maybe String
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
-pprCtsStepProblem TracingFlags{..} intro gCts dCts wCts = maybe [] return intro ++
-    if not (coerce traceCts) then [] else pprCts gCts dCts wCts
+pprCtsStepProblem indent TracingFlags{..} intro gCts dCts wCts = maybe [] return intro ++
+    if not (coerce traceCts) then [] else pprCts indent gCts dCts wCts
 
 -- | If tracing the solution, pretty print it.
-pprCtsStepSolution :: TracingFlags -> TcPluginResult -> [String]
-pprCtsStepSolution TracingFlags{..} x =
+pprCtsStepSolution :: Indent -> TracingFlags -> TcPluginResult -> [String]
+pprCtsStepSolution indent@(Indent i) TracingFlags{..} x =
     if not (coerce traceSolution) then [] else
     case x of
         TcPluginContradiction cs ->
             [
-                ( showString "  [solve]"
+                ( tab
+                . showString "[solve]"
                 . showString "\n"
-                . showString tab
+                . tabtab
                 . showString "contradiction = "
-                . pprList 4 cs)
+                . pprList j cs)
                 ""
             ]
 
         TcPluginOk solved newCts ->
             [
-                ( showString "  [solve]"
+                ( tab
+                . showString "[solve]"
                 . showString "\n"
-                . showString tab
+                . tabtab
                 . showString "solution = "
-                . pprList 4 solved
+                . pprList j solved
                 . showString "\n"
-                . showString tab
+                . tabtab
                 . showString "new-wanted = "
-                . pprList 4 newCts)
+                . pprList j newCts)
                 ""
             ]
+    where
+        tab = showString $ replicate (2 * i) ' '
+        tabtab = showString $ replicate (2 * (i + 1)) ' '
+        j = indent + 1
 
 -- | Trace the given string if any of the tracing flags are switched on.
 tracePlugin :: TracingFlags -> String -> TcPluginM ()

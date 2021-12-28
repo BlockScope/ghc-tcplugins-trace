@@ -1,8 +1,12 @@
+{-# LANGUAGE DerivingStrategies, GeneralizedNewtypeDeriving #-}
+
 {-# OPTIONS_GHC -Wno-orphans #-}
 
-module Plugins.Print.Constraints (pprList, pprCts) where
+module Plugins.Print.Constraints (Indent(..), pprList, pprCts) where
 
 import GHC.Corroborate
+
+newtype Indent = Indent Int deriving newtype Num
 
 -- | Pretty print a list using leading commas with each element on its own line.
 --
@@ -11,9 +15,9 @@ import GHC.Corroborate
 -- , 2
 -- , 3
 -- ]
-pprList :: Show a => Int -> [a] -> ShowS
-pprList indent xs = go xs where
-    tab = replicate indent ' '
+pprList :: Show a => Indent -> [a] -> ShowS
+pprList (Indent i) xs = go xs where
+    tab = replicate (2 * i) ' '
 
     go :: Show a => [a] -> ShowS
     go [] = showString "[]"
@@ -32,27 +36,33 @@ pprList indent xs = go xs where
 -- | Pretty print the constraints as a list of lists in the order of given,
 -- derived and wanted.
 pprCts
-    :: [Ct] -- ^ Given constraints
+    :: Indent
+    -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
-pprCts gCts dCts wCts = let tab = "    " in
+pprCts indent@(Indent i) gCts dCts wCts =
     [
-        ( showString "  [constraints]"
+        ( tab
+        . showString "[constraints]"
         . showString "\n"
-        . showString tab
+        . tabtab
         . showString "given = "
-        . pprList 4 gCts
+        . pprList j gCts
         . showString "\n"
-        . showString tab
+        . tabtab
         . showString "derived = "
-        . pprList 4 dCts
+        . pprList j dCts
         . showString "\n"
-        . showString tab
+        . tabtab
         . showString "wanted = "
-        . pprList 4 wCts)
+        . pprList j wCts)
         ""
     ]
+    where
+        tab = showString $ replicate (2 * i) ' '
+        tabtab = showString $ replicate (2 * (i + 1)) ' '
+        j = indent + 1
 
 maybeExtractTyEq :: Ct -> Maybe ((Type, Type), Ct)
 maybeExtractTyEq ct =
