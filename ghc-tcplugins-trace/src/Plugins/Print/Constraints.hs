@@ -23,7 +23,7 @@ pprList (Indent i) xs = go xs where
     go [] = showString "[]"
     go [y] = showString "[ " . shows y . showString " ]"
     go (y : ys) =
-        showString "[ "
+        showChar '['
         . showChar '\n'
         . showString tab
         . showString "  "
