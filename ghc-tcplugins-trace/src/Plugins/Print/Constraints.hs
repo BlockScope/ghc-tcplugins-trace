@@ -16,7 +16,7 @@ newtype Indent = Indent Int deriving newtype Num
 -- , 3
 -- ]
 pprList :: Show a => Indent -> [a] -> ShowS
-pprList (Indent i) xs = go xs where
+pprList (Indent i) = go where
     tab = replicate (2 * i) ' '
 
     go :: Show a => [a] -> ShowS
