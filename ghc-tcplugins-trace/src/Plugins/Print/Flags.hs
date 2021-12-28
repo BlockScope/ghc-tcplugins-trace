@@ -9,16 +9,18 @@ module Plugins.Print.Flags
     , pprSolverCallCount 
     ) where
 
+import Plugins.Print.Constraints (Indent(..))
+
 -- | Flag for controlling tracing counts of each time the plugin is called.
 newtype TraceCallCount = TraceCallCount Bool
 
 -- | Pretty print the calls of this plugin as a count if tracing calls.
-pprSolverCallCount :: TraceCallCount -> Int -> String
-pprSolverCallCount (TraceCallCount callCount) n
-    | callCount =
+pprSolverCallCount :: Indent -> TraceCallCount -> Int -> String
+pprSolverCallCount (Indent i) (TraceCallCount callCount) n
+    | callCount = let tab = showString $ replicate (2 * i) ' ' in
       ( showString "[ghc-tcplugin]"
-      . showString "\n"
-      . showString "  "
+      . showChar '\n'
+      . tab
       . showString "call = "
       . shows n)
       ""

@@ -24,13 +24,13 @@ pprList (Indent i) xs = go xs where
     go [y] = showString "[ " . shows y . showString " ]"
     go (y : ys) =
         showString "[ "
-        . showString "\n"
+        . showChar '\n'
         . showString tab
         . showString "  "
         . shows y
         . foldr
-            (\e m -> showString "\n" . showString tab . showString ", " . shows e . m)
-            (showString "\n" . showString tab . showString "]")
+            (\e m -> showChar '\n' . showString tab . showString ", " . shows e . m)
+            (showChar '\n' . showString tab . showChar ']')
             ys
 
 -- | Pretty print the constraints as a list of lists in the order of given,
@@ -41,28 +41,28 @@ pprCts
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
-pprCts indent@(Indent i) gCts dCts wCts =
+pprCts iIndent@(Indent i) gCts dCts wCts =
     [
         ( tab
         . showString "[constraints]"
-        . showString "\n"
+        . showChar '\n'
         . tabtab
         . showString "given = "
-        . pprList j gCts
-        . showString "\n"
+        . pprList jIndent gCts
+        . showChar '\n'
         . tabtab
         . showString "derived = "
-        . pprList j dCts
-        . showString "\n"
+        . pprList jIndent dCts
+        . showChar '\n'
         . tabtab
         . showString "wanted = "
-        . pprList j wCts)
+        . pprList jIndent wCts)
         ""
     ]
     where
         tab = showString $ replicate (2 * i) ' '
         tabtab = showString $ replicate (2 * (i + 1)) ' '
-        j = indent + 1
+        jIndent = iIndent + 1
 
 maybeExtractTyEq :: Ct -> Maybe ((Type, Type), Ct)
 maybeExtractTyEq ct =
@@ -74,7 +74,7 @@ instance Show Type where
     show ty = case splitTyConApp_maybe ty of
         Just (tcon, tys) ->
             ( shows tcon
-            . showString " "
+            . showChar ' '
             . shows tys)
             ""
         Nothing -> case getTyVar_maybe ty of
@@ -87,9 +87,9 @@ instance Show TyCon where
 instance Show Var where
     show v =
         ( showString (varOccName v)
-        . showString ";"
+        . showChar ';'
         . showString (varUnique v)
-        . showString ":"
+        . showChar ':'
         . showString (classifyVar v))
         ""
 

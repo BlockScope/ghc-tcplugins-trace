@@ -37,17 +37,17 @@ pprCtsStepProblem indent TracingFlags{..} intro gCts dCts wCts = maybe [] return
 
 -- | If tracing the solution, pretty print it.
 pprCtsStepSolution :: Indent -> TracingFlags -> TcPluginResult -> [String]
-pprCtsStepSolution indent@(Indent i) TracingFlags{..} x =
+pprCtsStepSolution iIndent@(Indent i) TracingFlags{..} x =
     if not (coerce traceSolution) then [] else
     case x of
         TcPluginContradiction cs ->
             [
                 ( tab
                 . showString "[solve]"
-                . showString "\n"
+                . showChar '\n'
                 . tabtab
                 . showString "contradiction = "
-                . pprList j cs)
+                . pprList jIndent cs)
                 ""
             ]
 
@@ -55,20 +55,20 @@ pprCtsStepSolution indent@(Indent i) TracingFlags{..} x =
             [
                 ( tab
                 . showString "[solve]"
-                . showString "\n"
+                . showChar '\n'
                 . tabtab
                 . showString "solution = "
-                . pprList j solved
-                . showString "\n"
+                . pprList jIndent solved
+                . showChar '\n'
                 . tabtab
                 . showString "new-wanted = "
-                . pprList j newCts)
+                . pprList jIndent newCts)
                 ""
             ]
     where
         tab = showString $ replicate (2 * i) ' '
         tabtab = showString $ replicate (2 * (i + 1)) ' '
-        j = indent + 1
+        jIndent = iIndent + 1
 
 -- | Trace the given string if any of the tracing flags are switched on.
 tracePlugin :: TracingFlags -> String -> TcPluginM ()
