@@ -85,24 +85,10 @@ instance Show TyCon where
     show = occNameString . getOccName
 
 instance Show Var where
-    show v =
-        ( showString (varOccName v)
-        . showChar ';'
-        . showString (varUnique v)
-        . showChar ':'
-        . showString (classifyVar v))
-        ""
-
-varOccName :: Var -> String
-varOccName = showSDocUnsafe . ppr . getOccName
+    show v = showString (varUnique v) ""
 
 varUnique :: Var -> String
 varUnique = show . getUnique
-
-classifyVar :: Var -> String
-classifyVar v
-    | isTcTyVar v = if isMetaTyVar v then "t" else "s"
-    | otherwise = "irr"
 
 instance Show Ct where
     show ct = case maybeExtractTyEq ct of
