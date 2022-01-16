@@ -4,7 +4,7 @@ module Plugins.Print.Flags
     , TraceCts(..)
     , TraceCarry(..)
     , TraceSolution(..)
-    , TracingFlags(..)
+    , DebugCts(..)
       -- * Pretty Printing
     , pprSolverCallCount 
     ) where
@@ -35,9 +35,9 @@ newtype TraceCarry = TraceCarry Bool
 -- | Flag for controlling tracing of the solution of type checking.
 newtype TraceSolution = TraceSolution Bool
 
--- | A group of flags for tracing.
-data TracingFlags =
-    TracingFlags
+-- | A group of flags for tracing constraits.
+data DebugCts =
+    DebugCts
         { traceCallCount :: TraceCallCount
         -- ^ Trace TcPlugin call count.
         , traceCts :: TraceCts
