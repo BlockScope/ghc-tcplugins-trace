@@ -4,7 +4,6 @@ module Plugins.Print
     ( -- * Flags
       TraceCallCount(..)
     , TraceCts(..)
-    , TraceCarry(..)
     , TraceSolution(..)
     , DebugCts(..)
       -- * Pretty Printing
@@ -25,25 +24,28 @@ import Plugins.Print.Flags
 
 -- | If tracing constraints, pretty print them.
 pprCtsStepProblem
-    :: Indent
+    :: String
+    -> Indent
     -> DebugCts
     -> Maybe String
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
-pprCtsStepProblem indent DebugCts{..} intro gCts dCts wCts = maybe [] return intro ++
-    if not (coerce traceCts) then [] else pprCts indent gCts dCts wCts
+pprCtsStepProblem section indent DebugCts{..} intro gCts dCts wCts = maybe [] return intro ++
+    if not (coerce traceCts) then [] else pprCts section indent gCts dCts wCts
 
 -- | If tracing the solution, pretty print it.
-pprCtsStepSolution :: Indent -> DebugCts -> TcPluginResult -> [String]
-pprCtsStepSolution iIndent@(Indent i) DebugCts{..} x =
+pprCtsStepSolution :: String -> Indent -> DebugCts -> TcPluginResult -> [String]
+pprCtsStepSolution title iIndent@(Indent i) DebugCts{..} x =
     if not (coerce traceSolution) then [] else
     case x of
         TcPluginContradiction cs ->
             [
                 ( tab
-                . showString "[solve]"
+                . showChar '['
+                . showString title
+                . showChar ']'
                 . showChar '\n'
                 . tabtab
                 . showString "contradiction = "
@@ -54,7 +56,9 @@ pprCtsStepSolution iIndent@(Indent i) DebugCts{..} x =
         TcPluginOk solved newCts ->
             [
                 ( tab
-                . showString "[solve]"
+                . showChar '['
+                . showString title
+                . showChar ']'
                 . showChar '\n'
                 . tabtab
                 . showString "solution = "
@@ -75,7 +79,6 @@ tracePlugin :: DebugCts -> String -> TcPluginM ()
 tracePlugin DebugCts{..} s'
     | coerce traceCallCount
         || coerce traceCts
-        || coerce traceCarry
         || coerce traceSolution =
         if null s' then return () else tcPluginIO $ putStrLn s'
 

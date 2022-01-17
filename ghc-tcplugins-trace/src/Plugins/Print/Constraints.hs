@@ -36,15 +36,18 @@ pprList (Indent i) = go where
 -- | Pretty print the constraints as a list of lists in the order of given,
 -- derived and wanted.
 pprCts
-    :: Indent
+    :: String
+    -> Indent
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
-pprCts iIndent@(Indent i) gCts dCts wCts =
+pprCts title iIndent@(Indent i) gCts dCts wCts =
     [
         ( tab
-        . showString "[constraints]"
+        . showChar '['
+        . showString title
+        . showChar ']'
         . showChar '\n'
         . tabtab
         . showString "given = "

@@ -2,7 +2,6 @@ module Plugins.Print.Flags
     ( -- * Flags
       TraceCallCount(..)
     , TraceCts(..)
-    , TraceCarry(..)
     , TraceSolution(..)
     , DebugCts(..)
       -- * Pretty Printing
@@ -29,9 +28,6 @@ pprSolverCallCount (Indent i) (TraceCallCount callCount) n
 -- | Flag for controlling tracing of type checking constraints.
 newtype TraceCts = TraceCts Bool
 
--- | Flag for controlling tracing of the carry.
-newtype TraceCarry = TraceCarry Bool
-
 -- | Flag for controlling tracing of the solution of type checking.
 newtype TraceSolution = TraceSolution Bool
 
@@ -42,8 +38,6 @@ data DebugCts =
         -- ^ Trace TcPlugin call count.
         , traceCts :: TraceCts
         -- ^ Trace GHC constraints.
-        , traceCarry :: TraceCarry
-        -- ^ Trace GHC constraints carried through conversion and solving.
         , traceSolution :: TraceSolution
         -- ^ Trace the solution, the @TcPluginResult@.
         }
