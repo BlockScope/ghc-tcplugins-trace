@@ -24,22 +24,22 @@ import Plugins.Print.Flags
 
 -- | If tracing constraints, pretty print them.
 pprCtsStepProblem
-    :: String
+    :: DebugCts
+    -> String
     -> Indent
-    -> DebugCts
     -> Maybe String
     -> [Ct] -- ^ Given constraints
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
-pprCtsStepProblem section indent DebugCts{..} intro gCts dCts wCts =
+pprCtsStepProblem DebugCts{..} section indent intro gCts dCts wCts =
     if not (coerce traceCts)
         then []
         else maybe [] return intro ++ pprCts section indent gCts dCts wCts
 
 -- | If tracing the solution, pretty print it.
-pprCtsStepSolution :: String -> Indent -> DebugCts -> TcPluginResult -> [String]
-pprCtsStepSolution title iIndent@(Indent i) DebugCts{..} x =
+pprCtsStepSolution :: DebugCts -> String -> Indent -> TcPluginResult -> [String]
+pprCtsStepSolution DebugCts{..} title iIndent@(Indent i) x =
     if not (coerce traceSolution) then [] else
     case x of
         TcPluginContradiction cs ->

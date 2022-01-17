@@ -14,8 +14,8 @@ import Plugins.Print.Constraints (Indent(..))
 newtype TraceCallCount = TraceCallCount Bool
 
 -- | Pretty print the calls of this plugin as a count if tracing calls.
-pprSolverCallCount :: String -> Indent -> TraceCallCount -> Int -> String
-pprSolverCallCount title (Indent i) (TraceCallCount callCount) n
+pprSolverCallCount :: TraceCallCount -> String -> Indent -> Int -> String
+pprSolverCallCount (TraceCallCount callCount) title (Indent i) n
     | callCount = let tab = showString $ replicate (2 * i) ' ' in
       ( showChar '['
       . showString title
