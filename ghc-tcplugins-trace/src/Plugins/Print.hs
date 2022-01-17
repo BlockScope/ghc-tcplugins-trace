@@ -32,8 +32,10 @@ pprCtsStepProblem
     -> [Ct] -- ^ Derived constraints
     -> [Ct] -- ^ Wanted constraints
     -> [String]
-pprCtsStepProblem section indent DebugCts{..} intro gCts dCts wCts = maybe [] return intro ++
-    if not (coerce traceCts) then [] else pprCts section indent gCts dCts wCts
+pprCtsStepProblem section indent DebugCts{..} intro gCts dCts wCts =
+    if not (coerce traceCts)
+        then []
+        else maybe [] return intro ++ pprCts section indent gCts dCts wCts
 
 -- | If tracing the solution, pretty print it.
 pprCtsStepSolution :: String -> Indent -> DebugCts -> TcPluginResult -> [String]
