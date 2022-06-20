@@ -1,6 +1,5 @@
 packages:
-    ghc-corroborate/ghc-corroborate
-    ghc-tcplugins-trace
     build
+    ghc-tcplugins-trace
 tests: True
 write-ghc-environment-files: always
