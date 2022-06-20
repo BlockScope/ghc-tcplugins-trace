@@ -1,7 +1,7 @@
 { version = "0.1.0"
 , author = "Phil de Joux"
 , maintainer = "phil.dejoux@blockscope.com"
-, copyright = "© 2017-2021 Phil de Joux, © 2017-2021 Block Scope Limited"
+, copyright = "© 2021-2022 Phil de Joux, © 2021-2022 Block Scope Limited"
 , git = "https://github.com/BlockScope/ghc-tcplugins-trace.git"
 , bug-reports = "https://github.com/blockscope/ghc-tcplugins-trace/issues"
 , license = "MPL-2.0"
