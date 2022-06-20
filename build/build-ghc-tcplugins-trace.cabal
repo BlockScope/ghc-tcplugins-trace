@@ -1,22 +1,29 @@
 cabal-version: 1.12
 
--- This file has been generated from package.dhall by hpack version 0.34.5.
+-- This file has been generated from package.dhall by hpack version 0.34.7.
 --
 -- see: https://github.com/sol/hpack
 
 name:           build-ghc-tcplugins-trace
-version:        0.3.0.1
+version:        0.1.0
 synopsis:       A shake build of ghc-tcplugins-trace.
 description:    Builds the packages making up ghc-tcplugins-trace.
 category:       Build
-author:         Adam Gundry <adam@well-typed.com>
-maintainer:     Adam Gundry <adam@well-typed.com>
-copyright:      Copyright (c) 2014-2018, Adam Gundry
+bug-reports:    https://github.com/blockscope/ghc-tcplugins-trace/issues
+author:         Phil de Joux
+maintainer:     phil.dejoux@blockscope.com
+copyright:      © 2017-2021 Phil de Joux, © 2017-2021 Block Scope Limited
+license:        MPL-2.0
+license-file:   LICENSE.md
 build-type:     Simple
 tested-with:
-    GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.3
+    GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.4, GHC == 8.10.7, GHC == 9.0.1
 extra-source-files:
     package.dhall
+
+source-repository head
+  type: git
+  location: https://github.com/BlockScope/ghc-tcplugins-trace.git
 
 executable build-ghc-tcplugins-trace
   main-is: Main.hs
@@ -24,7 +31,7 @@ executable build-ghc-tcplugins-trace
       Paths_build_ghc_tcplugins_trace
   hs-source-dirs:
       ./
-  ghc-options: -rtsopts -threaded -with-rtsopts=-N
+  ghc-options: -Wall -Werror -Wincomplete-uni-patterns -Wcompat -Widentities -Wredundant-constraints -fhide-source-paths -rtsopts -threaded -with-rtsopts=-N
   build-depends:
       ansi-terminal
     , base
@@ -32,8 +39,4 @@ executable build-ghc-tcplugins-trace
     , shake
     , text
     , time
-  if impl(ghc >= 8.8.0)
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors -fwrite-ide-info -hiedir=../.hie
-  else
-    ghc-options: -Wall -fno-warn-unticked-promoted-constructors
   default-language: Haskell2010

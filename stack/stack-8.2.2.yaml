@@ -2,6 +2,5 @@ resolver: lts-11.22
 packages:
 - ../build
 - ../ghc-tcplugins-trace
-- ../ghc-corroborate/ghc-corroborate
 extra-deps:
-- th-printf-0.7@sha256:c6b2c08e62a32a327b29b1a3739939f0c85b4079ff2ae6d79fac639f25ee48b1,2297
+- ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855

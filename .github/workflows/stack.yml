@@ -11,13 +11,14 @@ jobs:
       matrix:
         cabal: ["3.6"]
         ghc:
-          - "8.2.2"
+          # cabal copy fails with 8.2.2
+          # - "8.2.2"
           # Could not find module ‘Language.Haskell.Printf’ with 8.4.4
           # - "8.4.4"
           - "8.6.5"
           - "8.8.4"
           - "8.10.7"
-          - "9.0.1"
+          - "9.0.2"
 
     steps:
     - uses: actions/checkout@v3

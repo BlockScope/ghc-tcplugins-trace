@@ -13,7 +13,7 @@ packages:
     hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
 snapshots:
 - completed:
-    size: 524996
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/14/27.yaml
-    sha256: 7ea31a280c56bf36ff591a7397cc384d0dff622e7f9e4225b47d8980f019a0f0
-  original: lts-14.27
+    size: 619158
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/12.yaml
+    sha256: d4d7a4ac80485f3c21d0c6bfe5e7a21c3f71ca4fdfea022f98574047ebb58ebb
+  original: lts-19.12

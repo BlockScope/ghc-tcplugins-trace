@@ -1,4 +1,5 @@
 resolver: lts-16.31
 packages:
 - ../ghc-tcplugins-trace
-- ../ghc-corroborate/ghc-corroborate
+extra-deps:
+- ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855

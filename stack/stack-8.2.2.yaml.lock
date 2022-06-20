@@ -5,12 +5,12 @@
 
 packages:
 - completed:
-    hackage: th-printf-0.7@sha256:c6b2c08e62a32a327b29b1a3739939f0c85b4079ff2ae6d79fac639f25ee48b1,2297
+    hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
     pantry-tree:
-      size: 1067
-      sha256: ba9a8e2afaf6a16b65c7339fad5fbf49715a6613f5542d6adc42e90eca67b503
+      size: 4120
+      sha256: 92677e4f5b9145fc1e67bdb5843f699a4d17ea36aa08d5e99fe88a7065b539ea
   original:
-    hackage: th-printf-0.7@sha256:c6b2c08e62a32a327b29b1a3739939f0c85b4079ff2ae6d79fac639f25ee48b1,2297
+    hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
 snapshots:
 - completed:
     size: 527836

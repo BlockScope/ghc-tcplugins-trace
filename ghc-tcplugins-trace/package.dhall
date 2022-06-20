@@ -8,10 +8,7 @@ in    defs
       , category = "Development"
       , github = "blockscope/ghc-tcplugins-trace"
       , ghc-options = [ "-Wall", "-fno-warn-partial-type-signatures" ]
-      , dependencies =
-            defs.dependencies
-          # [ "ghc-corroborate"
-            ]
+      , dependencies = defs.dependencies # [ "ghc-corroborate >= 1.0" ]
       , library =
         { source-dirs = "src"
         , exposed-modules = [ "Plugins.Print" ]

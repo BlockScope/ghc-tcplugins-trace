@@ -3,7 +3,14 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
+    pantry-tree:
+      size: 4120
+      sha256: 92677e4f5b9145fc1e67bdb5843f699a4d17ea36aa08d5e99fe88a7065b539ea
+  original:
+    hackage: ghc-corroborate-1.0.0@sha256:60e580741703235dc81232c41b6a7b29b5cf5e337c92ef1745509e8abf22d2b5,3855
 snapshots:
 - completed:
     size: 534126
