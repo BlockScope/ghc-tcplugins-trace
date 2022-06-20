@@ -8,10 +8,10 @@ main :: IO ()
 main = shakeArgs shakeOptions $ do
     want ["cabal-files"]
 
-    sequence_ $ formatRoot <$> dhallRootImports
-    sequence_ $ formatPkg <$> dhallPkgs
-    sequence_ $ hpack <$> dhallPkgs
-    sequence_ $ cabal <$> dhallCabal
+    mapM_ formatRoot dhallRootImports
+    mapM_ formatPkg dhallPkgs
+    mapM_ hpack dhallPkgs
+    mapM_ cabal dhallCabal
     phony "dhall-format" $ need $ ("dhall-format-" ++) <$> dhallPkgs ++ dhallRootImports
     phony "hpack-dhall" $ need $ ("hpack-dhall-" ++) <$> dhallPkgs
     phony "cabal-files" $ need $ (\(x, y) -> x </> y <.> "cabal") <$> dhallCabal
